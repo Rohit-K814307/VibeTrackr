@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: vibetrackr-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    rootDir: vibetrackr/backend
+    envVars:
+      - key: FLASK_ENV
+        value: production

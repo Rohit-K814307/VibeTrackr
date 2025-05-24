@@ -1,0 +1,8 @@
+**/__pycache__/
+.DS_Store
+*.pyc
+.env
+.cache
+vibetrackr/backend/database/vibetrackr-firebase-admin-sdk.json
+vibetrackr/backend/utils/ml/emobank.csv
+vibetrackr/backend/utils/ml/vad-emotion/
