@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "bafa555a-2e88-44e5-b7c3-4f3f26eb7aaa",
+		"name": "VibeTrackr API",
+		"description": "Test out the VibeTrackr API & each endpoint individually.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23416484"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{firebase_id_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"test user\",\n    \"email\": \"test@example.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://vibetrackr.onrender.com/create-user",
+							"protocol": "https",
+							"host": [
+								"vibetrackr",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"create-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{firebase_id_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://vibetrackr.onrender.com/get-user",
+							"protocol": "https",
+							"host": [
+								"vibetrackr",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"get-user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Journals",
+			"item": [
+				{
+					"name": "Add Journal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{firebase_id_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Today's Journal\",\n    \"content\":\"Today was one of those days that tested every ounce of my patience and endurance. From back-to-back meetings to unexpected issues derailing my schedule, I felt like I was constantly putting out fires. There were moments I questioned whether I was actually making progress or just treading water. Still, as I sit and reflect, I realize I kept showing up—responding, adjusting, and doing my best. Maybe that’s what matters most on days like these: not perfection, but persistence. I’m proud I didn’t let the stress get the best of me, and tomorrow is a new chance to reset and refocus.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://vibetrackr.onrender.com/add-journal",
+							"protocol": "https",
+							"host": [
+								"vibetrackr",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"add-journal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Journals",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{firebase_id_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://vibetrackr.onrender.com/get-journals",
+							"protocol": "https",
+							"host": [
+								"vibetrackr",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"get-journals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Journals",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{firebase_id_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://vibetrackr.onrender.com/delete-journal?journal_id=init_journal",
+							"protocol": "https",
+							"host": [
+								"vibetrackr",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"delete-journal"
+							],
+							"query": [
+								{
+									"key": "journal_id",
+									"value": "init_journal"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Journal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{firebase_id_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"my new journal title\",\n    \"content\":\"Today was brutal. Everything that could go wrong *did*—deadlines got pushed on me last minute, people dropped the ball and somehow I was the one left cleaning it up. I’m tired of being the fallback, the fixer, the one who’s always expected to keep it together when no one else does. It’s infuriating to put in so much effort only to feel like I’m running in circles for people who don’t even notice. I know not every day will feel this heavy, but right now I’m angry, I’m drained, and honestly—I’m fed up. Tomorrow, things need to change.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://vibetrackr.onrender.com/update-journal?journal_id=5r878wQFiyBz3BoppIi6",
+							"protocol": "https",
+							"host": [
+								"vibetrackr",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"update-journal"
+							],
+							"query": [
+								{
+									"key": "journal_id",
+									"value": "5r878wQFiyBz3BoppIi6"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LLM Functions",
+			"item": [
+				{
+					"name": "Get Spotify Recommendations",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{firebase_id_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://vibetrackr.onrender.com/get-spot-recs",
+							"protocol": "https",
+							"host": [
+								"vibetrackr",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"get-spot-recs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ask Mood Mentor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{firebase_id_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://vibetrackr.onrender.com/get-mood-mentor",
+							"protocol": "https",
+							"host": [
+								"vibetrackr",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"get-mood-mentor"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.sendRequest({",
+					"  url: `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=`+pm.variables.get(\"firebase_api_key\"),",
+					"  method: 'POST',",
+					"  header: { 'Content-Type': 'application/json' },",
+					"  body: {",
+					"    mode: 'raw',",
+					"    raw: JSON.stringify({",
+					"      email: 'test@example.com',",
+					"      password: 'yourpassword',",
+					"      returnSecureToken: true",
+					"    })",
+					"  }",
+					"}, function (err, res) {",
+					"  if (err) {",
+					"    console.error(err);",
+					"  } else {",
+					"    const json = res.json();",
+					"    const idToken = json.idToken;",
+					"    pm.environment.set('firebase_id_token', idToken);",
+					"  }",
+					"});",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
