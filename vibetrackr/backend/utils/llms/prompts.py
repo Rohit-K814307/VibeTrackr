@@ -1,4 +1,4 @@
-from vibetrackr.backend.utils.llms.query import make_query, make_client
+from backend.utils.llms.query import make_query, make_client
 import os
 import math
 import spotipy

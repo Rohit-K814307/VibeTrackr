@@ -1,7 +1,7 @@
 import numpy as np
 from gradio_client import Client
 import time
-from vibetrackr.backend.utils.ml.emotions import classify_emotion, vibescore
+from backend.utils.ml.emotions import classify_emotion, vibescore
 
 
 def calc_vad(text, client=Client("RobroKools/vad-emotion")):
