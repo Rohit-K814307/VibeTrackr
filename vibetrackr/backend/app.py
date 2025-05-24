@@ -5,10 +5,10 @@ from flask_cors import CORS
 from flasgger import Swagger
 from datetime import datetime
 
-from backend.database.dbsetup import load_firebase_local, load_firebase_app
-from backend.utils.llms.prompts import get_spotify_client, get_spotify_recs, query_mood_mentor
-from backend.utils.llms.query import make_client
-from backend.utils.ml.query_api_bert import analyze_journal
+from database.dbsetup import load_firebase_local, load_firebase_app
+from utils.llms.prompts import get_spotify_client, get_spotify_recs, query_mood_mentor
+from utils.llms.query import make_client
+from utils.ml.query_api_bert import analyze_journal
 
 # === Setup ===
 app = Flask(__name__)
