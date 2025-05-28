@@ -90,7 +90,7 @@ def create_user():
     data = request.json
     name = data.get('name')
     email = data.get('email')
-    timezone = data.get('timezone')
+    timezone = data.get('timezone')["timeZone"]
     uid = request.user['uid']
 
     db.collection('users').document(uid).set({
@@ -102,8 +102,8 @@ def create_user():
     db.collection('users').document(uid).collection('journals').document('init_journal').set({
         'title': 'Placeholder to instantiate collection.',
         'content':"placeholder journal",
-        'timestamp':int(datetime.now(pytz.timezone(timezone)["timeZone"]).timestamp()),
-        'date':datetime.now(pytz.timezone(timezone)["timeZone"]).strftime('%Y-%m-%d')
+        'timestamp':int(datetime.now(pytz.timezone(timezone)).timestamp()),
+        'date':datetime.now(pytz.timezone(timezone)).strftime('%Y-%m-%d')
     })
 
     return jsonify({'message': 'User created'}), 201
@@ -207,8 +207,8 @@ def add_journal():
 
     journal_analysis = analyze_journal(journal_data.get("content"))
     journal_data["analysis"] = journal_analysis
-    journal_data["timestamp"] = int(datetime.now(pytz.timezone(timezone)["timeZone"]).timestamp())
-    journal_data["date"] = datetime.now(pytz.timezone(timezone)["timeZone"]).strftime('%Y-%m-%d')
+    journal_data["timestamp"] = int(datetime.now(pytz.timezone(timezone)).timestamp())
+    journal_data["date"] = datetime.now(pytz.timezone(timezone)).strftime('%Y-%m-%d')
 
     journal_ref = db.collection('users').document(uid).collection('journals').document()
     journal_ref.set(journal_data)
@@ -338,8 +338,8 @@ def update_journal():
 
     journal_analysis = analyze_journal(journal_data.get("content"))
     journal_data["analysis"] = journal_analysis
-    journal_data["timestamp"] = int(datetime.now(pytz.timezone(timezone)["timeZone"]).timestamp())
-    journal_data["date"] = datetime.now(pytz.timezone(timezone["timeZone"])).strftime('%Y-%m-%d')
+    journal_data["timestamp"] = int(datetime.now(pytz.timezone(timezone)).timestamp())
+    journal_data["date"] = datetime.now(pytz.timezone(timezone)).strftime('%Y-%m-%d')
 
     journal_ref.update(journal_data)
     return jsonify({'message': 'Journal updated'}), 200
@@ -382,7 +382,7 @@ def add_todays_journal():
     journal_list = [{**j.to_dict(), 'id': j.id} for j in journals if j.id != "init_journal"]
     latest_entry = sorted(journal_list, key=lambda x: x["timestamp"], reverse=True)[0]["date"]
 
-    if latest_entry == datetime.now(pytz.timezone(timezone)["timeZone"]).strftime('%Y-%m-%d'):
+    if latest_entry == datetime.now(pytz.timezone(timezone)).strftime('%Y-%m-%d'):
         return jsonify({"add":0})
     else:
         return jsonify({"add":1}), 200
