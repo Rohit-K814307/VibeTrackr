@@ -12,8 +12,8 @@ from utils.ml.query_api_bert import analyze_journal
 
 # === Setup ===
 app = Flask(__name__)
-#CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "https://vibetrackr.netlify.app"]}})
-CORS(app)
+CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "https://vibetrackr.netlify.app"]}}, supports_credentials=True)
+#CORS(app, supports_credentials=True)
 
 swagger = Swagger(app, template={
     "securityDefinitions": {
