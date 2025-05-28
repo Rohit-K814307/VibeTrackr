@@ -49,6 +49,11 @@ def verify_firebase_token(f):
 
 # === Routes ===
 
+@app.route('/')
+def home():
+    return jsonify({"Home":"Welcome to the VibeTrackr API!"})
+
+
 @app.route('/create-user', methods=['POST'])
 @verify_firebase_token
 def create_user():
@@ -146,7 +151,7 @@ def get_user():
         return jsonify({'error': 'User not found'}), 404
 
     journals = user_ref.collection('journals').stream()
-    journal_list = [{**j.to_dict(), 'id': j.id} for j in journals]
+    journal_list = [{**j.to_dict(), 'id': j.id} for j in journals if j.id != "init_journal"]
 
     user_data = user_doc.to_dict()
     user_data['journals'] = journal_list
@@ -332,6 +337,48 @@ def update_journal():
 
     journal_ref.update(journal_data)
     return jsonify({'message': 'Journal updated'}), 200
+
+
+@app.route('/add-todays-journal', methods=['GET'])
+@verify_firebase_token
+def add_todays_journal():
+    """
+    paths:
+    /add-todays-journal:
+      get:
+        tags:
+          - Journals
+        summary: Check if today's journal entry exists
+        description: |
+          Determines whether the authenticated user has already submitted a journal entry today.
+          Returns `{"add": 0}` if today's entry already exists, else `{"add": 1}`.
+        security:
+          - Bearer: []
+        responses:
+          '200':
+            description: Indicates if the user can add a journal entry today.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    add:
+                      type: integer
+                      enum: [0, 1]
+                      description: |
+                        - `0` = Today's journal already exists  
+                        - `1` = User can add a journal for today
+                      example: 1
+    """
+    uid = request.user['uid']
+    journals = db.collection('users').document(uid).collection('journals').stream()
+    journal_list = [{**j.to_dict(), 'id': j.id} for j in journals if j.id != "init_journal"]
+    latest_entry = sorted(journal_list, key=lambda x: x["timestamp"], reverse=True)[0]["date"]
+
+    if latest_entry == datetime.now().strftime('%Y-%m-%d'):
+        return jsonify({"add":0})
+    else:
+        return jsonify({"add":1}), 200
 
 
 @app.route('/get-spot-recs', methods=['GET'])
