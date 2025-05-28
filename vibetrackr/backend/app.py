@@ -4,6 +4,7 @@ from functools import wraps
 from flask_cors import CORS
 from flasgger import Swagger
 from datetime import datetime
+import pytz
 
 from database.dbsetup import load_firebase_local, load_firebase_app
 from utils.llms.prompts import get_spotify_client, get_spotify_recs, query_mood_mentor
@@ -89,18 +90,20 @@ def create_user():
     data = request.json
     name = data.get('name')
     email = data.get('email')
+    timezone = data.get('timezone')
     uid = request.user['uid']
 
     db.collection('users').document(uid).set({
         'name': name,
-        'email': email
+        'email': email,
+        'timezone':timezone
     })
 
     db.collection('users').document(uid).collection('journals').document('init_journal').set({
         'title': 'Placeholder to instantiate collection.',
         'content':"placeholder journal",
-        'timestamp':int(datetime.now().timestamp()),
-        'date':datetime.now().strftime('%Y-%m-%d')
+        'timestamp':int(datetime.now(pytz.timezone(timezone)).timestamp()),
+        'date':datetime.now(pytz.timezone(timezone)).strftime('%Y-%m-%d')
     })
 
     return jsonify({'message': 'User created'}), 201
@@ -198,12 +201,14 @@ def add_journal():
         description: Unauthorized
     """
     uid = request.user['uid']
+    timezone = db.collection('users').document(uid).get().to_dict()["timezone"]
+
     journal_data = request.json
 
     journal_analysis = analyze_journal(journal_data.get("content"))
     journal_data["analysis"] = journal_analysis
-    journal_data["timestamp"] = int(datetime.now().timestamp())
-    journal_data["date"] = datetime.now().strftime('%Y-%m-%d')
+    journal_data["timestamp"] = int(datetime.now(pytz.timezone(timezone)).timestamp())
+    journal_data["date"] = datetime.now(pytz.timezone(timezone)).strftime('%Y-%m-%d')
 
     journal_ref = db.collection('users').document(uid).collection('journals').document()
     journal_ref.set(journal_data)
@@ -324,6 +329,7 @@ def update_journal():
         return jsonify({'error': 'Missing journal_id'}), 400
 
     uid = request.user['uid']
+    timezone = db.collection('users').document(uid).get().to_dict()["timezone"]
     journal_data = request.json
     journal_ref = db.collection('users').document(uid).collection('journals').document(journal_id)
 
@@ -332,8 +338,8 @@ def update_journal():
 
     journal_analysis = analyze_journal(journal_data.get("content"))
     journal_data["analysis"] = journal_analysis
-    journal_data["timestamp"] = int(datetime.now().timestamp())
-    journal_data["date"] = datetime.now().strftime('%Y-%m-%d')
+    journal_data["timestamp"] = int(datetime.now(pytz.timezone(timezone)).timestamp())
+    journal_data["date"] = datetime.now(pytz.timezone(timezone)).strftime('%Y-%m-%d')
 
     journal_ref.update(journal_data)
     return jsonify({'message': 'Journal updated'}), 200
@@ -371,11 +377,12 @@ def add_todays_journal():
                       example: 1
     """
     uid = request.user['uid']
+    timezone = db.collection('users').document(uid).get().to_dict()["timezone"]
     journals = db.collection('users').document(uid).collection('journals').stream()
     journal_list = [{**j.to_dict(), 'id': j.id} for j in journals if j.id != "init_journal"]
     latest_entry = sorted(journal_list, key=lambda x: x["timestamp"], reverse=True)[0]["date"]
 
-    if latest_entry == datetime.now().strftime('%Y-%m-%d'):
+    if latest_entry == datetime.now(pytz.timezone(timezone)).strftime('%Y-%m-%d'):
         return jsonify({"add":0})
     else:
         return jsonify({"add":1}), 200
