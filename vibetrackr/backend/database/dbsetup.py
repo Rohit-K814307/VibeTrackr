@@ -5,7 +5,8 @@ from firebase_admin import credentials, firestore
 
 
 def load_firebase_app():
-    firebase_config = json.loads("/etc/secrets/vibetrackr-firebase-admin-sdk.json")
+    with open("/etc/secrets/vibetrackr-firebase-admin-sdk.json"):
+        firebase_config = json.loads("/etc/secrets/vibetrackr-firebase-admin-sdk.json")
     cred = credentials.Certificate(firebase_config)
     firebase_admin.initialize_app(cred)
     return firestore.client()
