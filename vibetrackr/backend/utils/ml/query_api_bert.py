@@ -10,7 +10,7 @@ def calc_vad(text, client=Client("RobroKools/vad-emotion")):
     return (valence, arousal, dominance)
 
 
-def analyze_journal(text, max_length=128, stride=32):
+def analyze_journal(text, max_length=500, stride=32):
 
     vad_scores = []
     length = len(text)
