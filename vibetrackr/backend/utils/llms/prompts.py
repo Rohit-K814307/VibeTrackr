@@ -68,7 +68,7 @@ def get_spotify_recs(journals, gai_client, sp):
 def query_mood_mentor(journals, gai_client):
 
     prompt = f"""You are a psychologist's assisstant. You will find credible and factual information backed by verified and trusted sources about mental health.
-                Here are a few journals your patient has been writing documenting their day: {journals}. Identify any issues, provide actionable steps and therapies, and include sources for every single thing you say that the patient can visit for more information.
+                Here are a few journals your patient has been writing documenting their day: {journals}. Identify any issues, provide actionable steps and therapies, and include sources for every single thing you say that the patient can visit for more information. Act as if you are providing this information directly to the patient.
                 The format MUST BE in json format. Example format that you must follow: {"[{'Issue 1': {'Steps':['step 1', 'step 2'], 'Therapies':['Therapy 1', 'Therapy 2'], 'Sources':['Source 1 link', 'Source 2 link']}}, {'Issue 2': {'Steps':['step 1', 'step 2'], 'Therapies':['Therapy 1', 'Therapy 2'], 'Sources':['Source 1 link', 'Source 2 link']}}]"}. DO NOT INCLUDE ANY INFORMATION OUTSIDE OF THIS FORMAT. Links should be LINKS ONLY
             """
 

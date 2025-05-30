@@ -69,7 +69,7 @@ const Hero151 = ({
     "A modern mental health companion built to help you journal, analyze your emotions, get tailored Spotify music recommendations, and receive thoughtful AI guidance—all in one place.",
   button = {
     text: "Start for Free",
-    url: "#",
+    url: "/sign-in",
   },
 }: Hero151Props) => {
   return (
