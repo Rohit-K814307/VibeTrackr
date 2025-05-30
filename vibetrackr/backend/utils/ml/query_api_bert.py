@@ -10,22 +10,10 @@ def calc_vad(text, client=Client("RobroKools/vad-emotion")):
     return (valence, arousal, dominance)
 
 
-def analyze_journal(text, max_length=500, stride=32):
-
-    vad_scores = []
-    length = len(text)
-
-    for i in range(0, length, stride):
-        chunk = text[i:i + max_length]
-        if not chunk.strip():
-            continue
-        valence, arousal, dominance = calc_vad(chunk)
-        time.sleep(0.5)
-        vad_scores.append([valence, arousal, dominance])
-        if i + max_length >= length:
-            break
-
-    vad_mean = np.mean(vad_scores, axis=0).tolist()
+def analyze_journal(text):
+    
+    valence, arousal, dominance = calc_vad(text)
+    vad_mean = [valence, arousal, dominance]
 
     vad_mean[0] = (2 * vad_mean[0] / 5) - 1
     vad_mean[1] = (2 * vad_mean[1] / 5) - 1
