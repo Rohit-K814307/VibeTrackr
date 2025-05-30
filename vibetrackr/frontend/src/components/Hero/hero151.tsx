@@ -1,4 +1,3 @@
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import { Pencil, Brain, Bot } from "lucide-react";
 import { SiSpotify as Spotify } from "react-icons/si"; // optional for Spotify icon

@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
-import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
+import { Menu } from "lucide-react";
 
 import {
   Accordion,
@@ -148,7 +148,7 @@ const Navbar2 = ({
                 <DropdownMenuSeparator />
 
                 <DropdownMenuItem asChild>
-                  <SignOutButton className="w-full text-left" />
+                  <SignOutButton />
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

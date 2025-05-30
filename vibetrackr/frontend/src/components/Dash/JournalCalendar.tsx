@@ -6,15 +6,13 @@ import {
   format,
   isSameDay,
   addDays,
-  subDays,
   parseISO,
   startOfDay,
   subMonths,
   addMonths,
   isSameMonth,
   isToday,
-  isBefore,
-  startOfWeek // <<<< Added startOfWeek import
+  isBefore
 } from "date-fns";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -195,7 +193,6 @@ export function JournalCalendar({ className }: JournalCalendarProps) {
 
 
   const renderDay = (day: Date) => {
-    const dateString = format(day, "yyyy-MM-dd");
     const isJournaled = journaledDates.some(journaledDate => isSameDay(day, journaledDate));
     const isHighlighted = highlightedDates.some(highlightedDate => isSameDay(day, highlightedDate));
 

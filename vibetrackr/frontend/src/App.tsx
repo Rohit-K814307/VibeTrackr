@@ -1,4 +1,3 @@
-import './App.css'
 import { Landing, SignIn, SignUp, Overview, InsightsDash } from './pages'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Footer } from './components'

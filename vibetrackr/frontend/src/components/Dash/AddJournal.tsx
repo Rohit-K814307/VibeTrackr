@@ -22,7 +22,7 @@ export const AddJournal: React.FC<AddJournalProps> = ({ open, onClose }) => {
   const [selectedEmoji, setSelectedEmoji] = useState('😀')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [userData, setUserData] = useState(null)
+  const [_, setUserData] = useState(null)
 
   const wordCount = content.trim() === '' ? 0 : content.trim().split(/\s+/).length
 

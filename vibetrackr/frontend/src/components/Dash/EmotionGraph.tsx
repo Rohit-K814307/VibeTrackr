@@ -1,6 +1,4 @@
-// src/components/WeeklyEmotionChart.tsx
-
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { getAuth } from "firebase/auth";
 import { fetchWithRetry } from "@/utils";
 import { format, parseISO, startOfWeek, addDays, isSameDay } from "date-fns";
@@ -144,7 +142,7 @@ export function EmotionGraph() {
         weeklyData.length > 0 ? (
           <div className="overflow-x-auto pb-2 -mx-2">
             <div className="flex justify-between items-end min-w-full md:min-w-0 md:justify-around">
-              {weeklyData.map((day, index) => (
+              {weeklyData.map((day, _) => (
                 <div
                   key={day.date.toISOString()}
                   className="flex flex-col items-center flex-shrink-0 px-2"

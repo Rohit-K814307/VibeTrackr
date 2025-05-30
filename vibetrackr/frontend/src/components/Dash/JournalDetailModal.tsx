@@ -7,7 +7,7 @@ interface JournalEntry {
   title: string;
   emoji: string;
   emotion: string;
-  journal: string;
+  content: string;
 }
 
 interface JournalDetailModalProps {
