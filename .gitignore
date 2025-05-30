@@ -28,3 +28,4 @@ vibetrackr/frontend/*.ntvs*
 vibetrackr/frontend/*.njsproj
 vibetrackr/frontend/*.sln
 vibetrackr/frontend/*.sw?
+vibetrackr/frontend/dist/
