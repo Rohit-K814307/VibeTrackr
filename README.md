@@ -1,9 +1,8 @@
 <div id="top">
 
-<!-- HEADER STYLE: MODERN -->
-<div align="left" style="position: relative; width: 100%; height: 100%; ">
+<div align="center"><img src="https://github.com/Rohit-K814307/VibeTrackr/blob/main/vibetrackr/frontend/public/logo.svg" width="10%"  alt="VibeTrackr Logo"/></div>
 
-<img src="https://github.com/Rohit-K814307/VibeTrackr/blob/main/vibetrackr/frontend/public/logo.svg" width="30%" style="position: absolute; top: 0; right: 0;" alt="VibeTrackr Logo"/>
+<div align="left" style="position: relative; width: 100%; height: 100%; ">
 
 # VIBETRACKR
 
