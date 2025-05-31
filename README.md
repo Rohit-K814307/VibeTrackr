@@ -2,7 +2,7 @@
 
 <div align="center"><img src="https://github.com/Rohit-K814307/VibeTrackr/blob/main/vibetrackr/frontend/public/logo.svg" width="10%"  alt="VibeTrackr Logo"/></div>
 
-<div align="left" style="position: relative; width: 100%; height: 100%; ">
+<div align="center" style="position: relative; width: 100%; height: 100%; ">
 
 # VIBETRACKR
 
