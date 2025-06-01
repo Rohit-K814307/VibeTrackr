@@ -1,6 +1,6 @@
 export interface JournalEntry {
     journalId: string;
-    journalTitle: string;
+    title: string;
     content: string;
     date: string; // YYYY-MM-DD format
     timestamp: number; // Unix timestamp

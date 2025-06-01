@@ -13,7 +13,7 @@ interface EmotiveAngularDistanceChartProps {
 export const EmotiveAngularDistanceChart: React.FC<EmotiveAngularDistanceChartProps> = ({ journals }) => {
   const sortedJournals = [...journals].sort((a, b) => a.timestamp - b.timestamp);
 
-  const labels = sortedJournals.map((journal) => new Date(journal.timestamp).toLocaleDateString());
+  const labels = sortedJournals.map((journal) => new Date(journal.timestamp * 1000).toLocaleDateString());
   const dataValues = sortedJournals.map((journal) => journal.analysis.Emotive_Angular_Distance);
 
   const data = {
@@ -63,7 +63,7 @@ export const EmotiveAngularDistanceChart: React.FC<EmotiveAngularDistanceChartPr
   return (
     <Card className="h-[400px]">
       <CardHeader>
-        <CardTitle>Emotional Stability Indicator</CardTitle>
+        <CardTitle>Emotional Stability Indicator (Lower is better)</CardTitle>
       </CardHeader>
       <CardContent className="relative h-[calc(100%-80px)]">
         {journals.length > 0 ? (

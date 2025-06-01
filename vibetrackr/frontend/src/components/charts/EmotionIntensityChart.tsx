@@ -13,7 +13,7 @@ interface EmotionIntensityChartProps {
 export const EmotionIntensityChart: React.FC<EmotionIntensityChartProps> = ({ journals }) => {
   const sortedJournals = [...journals].sort((a, b) => a.timestamp - b.timestamp);
 
-  const labels = sortedJournals.map((journal) => new Date(journal.timestamp).toLocaleDateString());
+  const labels = sortedJournals.map((journal) => new Date(journal.timestamp * 1000).toLocaleDateString());
   const dataValues = sortedJournals.map((journal) => journal.analysis.Valence_Scaled_By_Mag);
 
   const data = {
