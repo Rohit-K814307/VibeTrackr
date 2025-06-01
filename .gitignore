@@ -4,6 +4,8 @@
 .env
 .cache
 
+populate_test.ipynb
+
 vibetrackr/backend/database/vibetrackr-firebase-admin-sdk.json
 vibetrackr/backend/utils/ml/emobank.csv
 vibetrackr/backend/utils/ml/vad-emotion/

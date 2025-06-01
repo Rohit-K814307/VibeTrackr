@@ -430,7 +430,7 @@ def get_spot_recs():
     journals = db.collection('users').document(uid).collection('journals').stream()
     journal_list = [{**j.to_dict(), 'id': j.id} for j in journals if j.id != "init_journal"]
 
-    latest_entries = sorted(journal_list, key=lambda x: x["timestamp"], reverse=True)[:6]
+    latest_entries = sorted(journal_list, key=lambda x: x["timestamp"], reverse=True)[:5]
     journals_str = "\n\n".join(j.get("content", "") for j in latest_entries)
 
     tracks = get_spotify_recs(journals_str, gai, spotify)
