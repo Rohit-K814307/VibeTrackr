@@ -1,6 +1,7 @@
 import numpy as np
 
 
+#define emotion bounds
 EMOTION_VAD = {
     "Angry":       np.array([(-0.6 + -0.8)/2, (0.6 + 0.9)/2, (0.4 + 0.7)/2]),
     "Anxious":     np.array([(-0.5 + -0.7)/2, (0.7 + 0.9)/2, (-0.3 + -0.6)/2]),
@@ -15,9 +16,11 @@ EMOTION_VAD = {
     "Neutral":     np.array([0.0, 0.0, 0.0]),
 }
 
+#define some basic functions
 def cosine_similarity(a, b):
     return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b) + 1e-8)
 
+#calculate the emotion based on the vad scores
 def classify_emotion(vad):
     vad = np.array(vad)
     best_emotion = None
@@ -32,6 +35,6 @@ def classify_emotion(vad):
 
     return best_emotion, (np.arccos(best_score) * np.pi) / 180
 
-
+#magnitude scaled by valence
 def vibescore(v, a, d):
     return v * np.linalg.norm(np.array([v,a,d]))

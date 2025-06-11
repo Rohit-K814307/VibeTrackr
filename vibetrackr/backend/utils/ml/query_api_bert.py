@@ -4,6 +4,7 @@ import time
 from utils.ml.emotions import classify_emotion, vibescore
 
 
+#calculate the VAD scores
 def calc_vad(text, client=Client("RobroKools/vad-emotion")):
 
     valence, arousal, dominance = client.predict(text, api_name="/predict")
