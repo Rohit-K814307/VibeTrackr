@@ -53,6 +53,16 @@ The fully functional, production project is available at [https://vibetrackr.net
 
 This project uses several API connections. We fine tune a BERT model + regression head for determining the psychoemotional values of Valence, Emotion, and Dominance in order to run emotion analytics. Access the [HuggingFace Repo](https://huggingface.co/RobroKools/vad-bert) for model information and data. Access the [HuggingFace Space and Gradio API](https://huggingface.co/spaces/RobroKools/vad-emotion) to get emotion analytics for your use case.
 
+Here are some evaluation metrics of the model on the test set:
+<div align="center">
+
+| Metric        | Value   |
+|---------------|---------|
+| Test RMSE     | 0.2054  |
+| Test MAE      | 0.1566  |
+| Test R<sup>2</sup> Score | 0.3771  |
+
+</div>
 
 ---
 

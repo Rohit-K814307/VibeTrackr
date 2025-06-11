@@ -3,6 +3,7 @@ from google import genai
 from google.genai import types
 
 
+#make the google ai gemini client to be reused elsewhere (for easy use)
 def make_client():
     key = os.environ.get("aistudiokey")
     client = genai.Client(api_key=key)

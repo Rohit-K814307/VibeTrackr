@@ -16,6 +16,8 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "https://vibetrackr.netlify.app"]}}, supports_credentials=True)
 #CORS(app, supports_credentials=True)
 
+
+#build swagger defs + docs for the api routes
 swagger = Swagger(app, template={
     "securityDefinitions": {
         "Bearer": {
@@ -26,6 +28,7 @@ swagger = Swagger(app, template={
         }
     }
 })
+
 
 db = load_firebase_app()
 spotify = get_spotify_client()
@@ -40,7 +43,7 @@ def verify_firebase_token(f):
             return jsonify({'error': 'Unauthorized'}), 401
         id_token = auth_header.split('Bearer ')[1]
         try:
-            decoded_token = auth.verify_id_token(id_token)
+            decoded_token = auth.verify_id_token(id_token) #essentially get id token from bearer 
             request.user = decoded_token
         except Exception as e:
             return jsonify({'error': 'Invalid token', 'details': str(e)}), 401

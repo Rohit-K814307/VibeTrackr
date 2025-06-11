@@ -26,17 +26,17 @@ def get_spotify_recs(journals, gai_client, sp):
     final_tracks = []
     artists_seen = set()
 
-    for genre in genres:
+    for genre in genres: #go through llm genres
         artists_results = sp.search(q=f'genre:"{genre}"', type='artist', limit=10)
         artists = artists_results['artists']['items']
         
-        genre_tracks_collected = 0
+        genre_tracks_collected = 0 
         
-        for artist in artists:
+        for artist in artists:#find the top artists in the genre that actually have enough tracks
             if genre_tracks_collected >= tracks_per_genre:
                 break
             
-            if artist['id'] in artists_seen:
+            if artist['id'] in artists_seen: #make sure artists are not repeated other than for max number of tracks per artist
                 continue
             
             top_tracks = sp.artist_top_tracks(artist['id'], country='US')['tracks']
@@ -47,7 +47,7 @@ def get_spotify_recs(journals, gai_client, sp):
                 if genre_tracks_collected >= tracks_per_genre:
                     break
 
-                final_tracks.append({
+                final_tracks.append({ #compose tracks 
                     'track_name': track['name'],
                     'artist_name': artist['name'],
                     'genre': genre,
@@ -58,7 +58,7 @@ def get_spotify_recs(journals, gai_client, sp):
             
             artists_seen.add(artist['id'])
 
-    final_tracks = final_tracks[:max_total_tracks]
+    final_tracks = final_tracks[:max_total_tracks] #break down to only the top max total tracks
 
     return final_tracks
 
